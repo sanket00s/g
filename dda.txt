@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+#include<dos.h>
+#include<stdlib.h> // For abs() function
+void main()
+{
+ int x1, y1, x2, y2, dx, dy, step, i;
+ float x, y, xinc, yinc;
+ int gd = DETECT, gm;
+ initgraph(&gd, &gm, "C:\\tc\\BGI");
+ printf("ENTER STARTING COORDINATES: ");
+ scanf("%d%d", &x1, &y1);
+ printf("ENTER ENDING COORDINATES: ");
+ scanf("%d%d", &x2, &y2);
+ dx = x2 - x1;
+ dy = y2 - y1;
+ if (abs(dx) > abs(dy))
+ step = abs(dx);
+ else
+ step = abs(dy);
+ xinc = dx / (float)step;
+ yinc = dy / (float)step;
+ x = x1;
+ y = y1;
+ for (i = 0; i <= step; i++)
+ {
+ putpixel(x, y, 10);
+ x = x + xinc;
+ y = y + yinc;
+ delay(10);
+ }
+ getch();
+ closegraph();
+}

@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <graphics.h>
+#include <conio.h>
+#include <dos.h> // Include this for the delay function
+#include <math.h>
+void boundaryfill(int x, int y, int fill_colour, int boundary_colour) {
+ int current;
+ current = getpixel(x, y);
+ if ((current != boundary_colour) && (current != fill_colour)) {
+ setcolor(fill_colour);
+ putpixel(x, y, fill_colour);
+ delay(4);
+ boundaryfill(x + 1, y, fill_colour, boundary_colour);
+ boundaryfill(x - 1, y, fill_colour, boundary_colour);
+ boundaryfill(x, y + 1, fill_colour, boundary_colour);
+ boundaryfill(x, y - 1, fill_colour, boundary_colour);
+ }
+}
+void main() {
+ int gd = DETECT, gm;
+ initgraph(&gd, &gm, "C:\\tc\\BGI");
+ setcolor(WHITE);
+ rectangle(250, 200, 310, 260);
+ boundaryfill(280, 250, RED, WHITE);
+ getch();
+ closegraph();
+}

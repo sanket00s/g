@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <conio.h>
+#include <graphics.h>
+#include <dos.h>
+void flood(int x, int y, int fillcolor, int oldcolor) {
+ int current;
+ current = getpixel(x, y);
+ if (current == oldcolor) {
+ delay(4);
+ putpixel(x, y, fillcolor);
+ flood(x + 1, y, fillcolor, oldcolor);
+ flood(x - 1, y, fillcolor, oldcolor);
+ flood(x, y + 1, fillcolor, oldcolor);
+ flood(x, y - 1, fillcolor, oldcolor);
+ }
+}
+void main() {
+ int gd = DETECT, gm;
+ initgraph(&gd, &gm, "C:\\tc\\BGI");
+ setcolor(RED);
+ line(50, 50, 100, 50);
+ line(50, 50, 50, 75);
+ line(100, 50, 100, 75);
+ setcolor(YELLOW);
+ line(50, 75, 50, 100);
+ line(50, 100, 100, 100);
+ line(100, 75, 100, 100);
+ flood(55, 55, BLUE, 0);
+ getch();
+ closegraph();
+}

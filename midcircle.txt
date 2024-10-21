@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+#include<math.h>
+void main()
+{
+int gdrive=DETECT, gmode,error;
+int xc,yc,x,y;
+float dp,r;
+clrscr();
+initgraph(&gdrive,&gmode,"C:\\tc\\BGI");
+printf("Enter the Center Coordinates");
+scanf("%d%d", &xc,&yc);
+printf("Enter Radius");
+scanf("%f",&r);
+x=0;
+y=r;
+dp=(5/4)-r;
+do{
+putpixel(xc+x,yc+y,YELLOW);
+putpixel(xc-x,yc+y,YELLOW);
+putpixel(xc+x,yc-y,YELLOW);
+putpixel(xc-x,yc-y,YELLOW);
+putpixel(xc+y,yc+x,YELLOW);
+putpixel(xc-y,yc+x,YELLOW);
+putpixel(xc+y,yc-x,YELLOW);
+putpixel(xc-y,yc-x,YELLOW);
+if(dp<0)
+{
+dp=dp+((2*x)+3);
+}
+else{
+dp=dp+((2*(x-y))+5);
+y--;
+}
+x++;
+}
+while(x<y);
+getch();
+closegraph();
+}
